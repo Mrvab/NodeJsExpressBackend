@@ -5,15 +5,24 @@
 
 # How to run
 - clone the repo : run below command
-``` git clone https://github.com/Mrvab/NodeJsExpressBackend.git ```
+``` 
+git clone https://github.com/Mrvab/NodeJsExpressBackend.git 
+```
 - switch to branch "express-rest-api-crud" : run below command
-``` git checkout express-rest-api-crud ```
+``` 
+git checkout express-rest-api-crud 
+```
 - install npm packages : run below command
-``` npm i ```
+```
+ npm i 
+ ```
 - run the server : run below command
-``` node index.js ```
+```
+ node index.js 
+```
 
 # Requirements
+
 - Node.js
 - git
 
