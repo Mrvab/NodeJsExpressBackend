@@ -1,0 +1,33 @@
+{
+  "name": "express-backend-boiler-plate",
+  "version": "1.0.0",
+  "description": "A boiler plate code for express server for quick and easy implementation of RESTfull api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-local": "set NODE_ENV=local && nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mrvab/NodeJsExpressBackend.git"
+  },
+  "keywords": [
+    "expressboilerplate"
+  ],
+  "author": "Vaibhav Kumar Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mrvab/NodeJsExpressBackend/issues"
+  },
+  "homepage": "https://github.com/Mrvab/NodeJsExpressBackend#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.40.0",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.3.1",
+    "nodemon": "^2.0.22"
+  }
+}
