@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 creds
+package-lock.json
+test2.js

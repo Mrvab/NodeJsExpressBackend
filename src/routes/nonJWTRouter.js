@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const { signInController } = require("../api/controllers/signinController");
-const { signUpController } = require("../api/controllers/signupController");
+const { Router } = require('express')
+const { signInController } = require('../api/controllers/signinController')
+const { signUpController } = require('../api/controllers/signupController')
 
-const nonJwtRouter = Router();
-userRouter.get("/signIn", signInController);
-userRouter.get("/signUp", signUpController);
+const nonJwtRouter = Router()
+nonJwtRouter.get('/signIn', signInController)
+nonJwtRouter.get('/signUp', signUpController)
 
-module.exports.nonJwtRouter = nonJwtRouter;
+module.exports.nonJwtRouter = nonJwtRouter

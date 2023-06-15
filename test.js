@@ -1,42 +1,39 @@
-async function main1(input) {
- 
-    await Promise.all(input.map(async (t) => {
-   
-      await sleep(t);
-   
-      console.log('main1', t);
-   
-    }));
-   
-  }
-   
-  async function main2(input) {
-   
-    for (let i = 0; i < input.length; i += 1) {
-   
-      await sleep(input[i]);
-   
-      console.log('main2', input[i]);
-   
-    }
-   
-  }
+const crypto = require('crypto')
+const algorithm = 'aes-256-cbc' // Using AES encryption
+const key = crypto.randomBytes(32)
+const iv = crypto.randomBytes(16)
 
-  function sleep(t){
-    return new Promise((res,rej)=>{
-        setTimeout(() => {
-            res(console.log('sleep'))
-        }, t * 1000);
-    })
-  }
-   
-  const ex = [1, 2, 3, 4, 5];
-//    main1(ex)
-//    main2(ex)
-  Promise.all([
-   
-    main1(ex),
-   
-    main2(ex),
-   
-  ]).then(() => process.exit(0));
+// Encrypting text
+function encrypt (text) {
+  const cipher = crypto.createCipheriv(algorithm, Buffer.from(key), iv)
+  let encrypted = cipher.update(text)
+  encrypted = Buffer.concat([encrypted, cipher.final()])
+  return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') }
+}
+
+// Decrypting text
+function decrypt (text) {
+  const iv = Buffer.from(text.iv, 'hex')
+  const encryptedText = Buffer.from(text.encryptedData, 'hex')
+  const decipher = crypto.createDecipheriv(algorithm, Buffer.from(key), iv)
+  let decrypted = decipher.update(encryptedText)
+  decrypted = Buffer.concat([decrypted, decipher.final()])
+  return decrypted.toString()
+}
+
+function createHash (text) {
+  const hashed = crypto.sign(algorithm, text, key)
+  return hashed
+}
+
+function verifyHash (text) {
+  const verified = crypto.verify(algorithm, text, key)
+  return verified
+}
+
+console.log(createHash("my supper secret password that should be safe "))
+
+// Text send to encrypt function
+// const hw = encrypt('Welcome to Tutorials Point...')
+// console.log(hw)
+// console.log(decrypt(hw))

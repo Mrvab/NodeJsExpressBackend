@@ -1,5 +1,8 @@
-# Node Js Express Backend
-- This Repo contains backend server code built using express framework
+# Node Js Express Backend :
+- This Repo contains backend server boiler built using express framework and mysql for db connection
+
+# Note :
+- node version 18.x
 
 # Folder Structure
 
@@ -12,3 +15,6 @@
   - utility -> folder for all utility code.
   - routes -> folder for code that take care of api routes.
   - config -> folder containing Json Objects required for consistency
+
+  # TODO
+  - add body validator

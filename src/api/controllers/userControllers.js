@@ -1,62 +1,42 @@
-const { responseHandler } = require("../../utility/responseHandler");
+const { messages } = require('../../config/messages')
+const { responseHandler } = require('../../utility/responseHandler')
+const { responseCallerService } = require('../services/commonServices/responseCallerService')
 
 const {
-    getUserProfile,
+  getUserProfile,
   updateUserProfile,
-  deleteUserProfile,
-} = require("../services/commonServices/userServices");
+  deleteUserProfile
+} = require('../services/commonServices/userServices')
 
 module.exports.getUserProfileById = async (req, res) => {
   try {
-    let { id } = req.body,
-      message = "user profile found!!";
-    const userProfile = await getUserProfile(id);
-    return responseHandler(res, 200, message, userProfile[0], {});
+    const { id } = req.body
+    const userProfile = await getUserProfile(id)
+    return responseCallerService(userProfile[0].message, res, 'USER_PROFILE', userProfile[0])
   } catch (error) {
-    console.log(error);
-    let message = "something went wrong";
-    return responseHandler(res, 500, message, {}, message);
+    console.error('get user profile => ', error)
+    return responseHandler(res, 500, messages.GLOBAL_CRASH, {}, messages.GLOBAL_CRASH)
   }
-};
+}
 
 module.exports.updateUserProfile = (req, res) => {
   try {
-    let message = "user profile updated successfully";
-    const { id, name, email, city, state } = req.body;
-    const updateProfileResponse = updateUserProfile(
-      id,
-      name,
-      email,
-      city,
-      state
-    );
-    return responseHandler(res, 200, message, updateProfileResponse, {});
+    const { id, name, email, city, state } = req.body
+    const updateProfileResponse = updateUserProfile(id, name, email, city, state)
+    return responseCallerService(updateProfileResponse[0].message, res, 'UPDATE_PROFILE', updateProfileResponse[0])
   } catch (error) {
-    console.log("updateUserProfile : ", error);
-    return responseHandler(
-      res,
-      500,
-      "something went wrong",
-      {},
-      "something went wrong"
-    );
+    console.error('updateUserProfile : ', error)
+    return responseHandler(res, 500, messages.GLOBAL_CRASH, {}, messages.GLOBAL_CRASH)
   }
-};
+}
 
-module.exports.deleteUserProfile = async (req,res)=>{
-    try {
-        const {id} = req.body
-        const deleteUserResponse = await deleteUserProfile(id)
-        return responseHandler(res,200,'user has been deleted',deleteUserResponse,{})
-        
-    } catch (error) {
-        console.log("deleteUserProfile : ", error);
-        return responseHandler(
-          res,
-          500,
-          "something went wrong",
-          {},
-          "something went wrong"
-        );
-    }
+module.exports.deleteUserProfile = async (req, res) => {
+  try {
+    const { id } = req.body
+    const deleteUserResponse = await deleteUserProfile(id)
+    return responseCallerService(deleteUserResponse[0].message, res, 'DELETE_USER', deleteUserResponse[0])
+  } catch (error) {
+    console.error('deleteUserProfile : ', error)
+    return responseHandler(res, 500, messages.GLOBAL_CRASH, {}, messages.GLOBAL_CRASH)
+  }
 }
